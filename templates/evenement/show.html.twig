@@ -1,0 +1,46 @@
+
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdEve</th>
+                <td>{{ evenement.idEve }}</td>
+            </tr>
+            <tr>
+                <th>NomEve</th>
+                <td>{{ evenement.nomEve }}</td>
+            </tr>
+            <tr>
+                <th>DateDeve</th>
+                <td>{{ evenement.dateDeve ? evenement.dateDeve|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFeve</th>
+                <td>{{ evenement.dateFeve ? evenement.dateFeve|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NbrMax</th>
+                <td>{{ evenement.nbrMax }}</td>
+            </tr>
+            <tr>
+                <th>AdresseEve</th>
+                <td>{{ evenement.adresseEve }}</td>
+            </tr>
+            <tr>
+                <th>ImageEve</th>
+                <td><img src="{{ asset('uploads/' ~ evenement.imageEve) }}" alt="Image de l'événement"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_evenement_index') }}">back to list</a>
+
+    <a href="{{ path('app_evenement_edit', {'idEve': evenement.idEve}) }}">edit</a>
+
+    {{ include('evenement/_delete_form.html.twig') }}
+{% endblock %}

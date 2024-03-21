@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement index{% endblock %}
+
+{% block body %}
+    <h1>Equipement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ideq</th>
+                <th>Nomeq</th>
+                <th>Desceq</th>
+                <th>Doceq</th>
+                <th>Imageeq</th>
+                <th>Categeq</th>
+                <th>Noteeq</th>
+                <th>Marqueeq</th>
+                <th>Matriculeeq</th>
+                <th>Datepremainte</th>
+                <th>Datepromainte</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipement in equipements %}
+            <tr>
+                <td>{{ equipement.ideq }}</td>
+                <td>{{ equipement.nomeq }}</td>
+                <td>{{ equipement.desceq }}</td>
+                <td>{{ equipement.doceq }}</td>
+                <td>{{ equipement.imageeq }}</td>
+                <td>{{ equipement.categeq }}</td>
+                <td>{{ equipement.noteeq }}</td>
+                <td>{{ equipement.marqueeq }}</td>
+                <td>{{ equipement.matriculeeq }}</td>
+                <td>{{ equipement.datepremainte ? equipement.datepremainte|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ equipement.datepromainte ? equipement.datepromainte|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_equipement_show', {'ideq': equipement.ideq}) }}">show</a>
+                    <a href="{{ path('app_equipement_edit', {'ideq': equipement.ideq}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avisequipement index{% endblock %}
+
+{% block body %}
+    <h1>Avisequipement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idaeq</th>
+                <th>Commaeq</th>
+                <th>Like</th>
+                <th>Dislike</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for avisequipement in avisequipements %}
+            <tr>
+                <td>{{ avisequipement.idaeq }}</td>
+                <td>{{ avisequipement.commaeq }}</td>
+                <td>{{ avisequipement.like ? 'Yes' : 'No' }}</td>
+                <td>{{ avisequipement.dislike ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_avisequipement_show', {'idaeq': avisequipement.idaeq}) }}">show</a>
+                    <a href="{{ path('app_avisequipement_edit', {'idaeq': avisequipement.idaeq}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_avisequipement_new') }}">Create new</a>
+{% endblock %}

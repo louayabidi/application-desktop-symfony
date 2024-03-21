@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participation index{% endblock %}
+
+{% block body %}
+    <h1>Participation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdP</th>
+                <th>NomP</th>
+                <th>PrenomP</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participation in participations %}
+            <tr>
+                <td>{{ participation.idP }}</td>
+                <td>{{ participation.nomP }}</td>
+                <td>{{ participation.prenomP }}</td>
+                <td>{{ participation.email }}</td>
+                <td>{{ participation.age }}</td>
+                <td>
+                    <a href="{{ path('app_participation_show', {'idP': participation.idP}) }}">show</a>
+                    <a href="{{ path('app_participation_edit', {'idP': participation.idP}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_participation_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plat{% endblock %}
+
+{% block body %}
+    <h1>Plat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idp</th>
+                <td>{{ plat.idp }}</td>
+            </tr>
+            <tr>
+                <th>Nomp</th>
+                <td>{{ plat.nomp }}</td>
+            </tr>
+            <tr>
+                <th>Prixp</th>
+                <td>{{ plat.prixp }}</td>
+            </tr>
+            <tr>
+                <th>Descp</th>
+                <td>{{ plat.descp }}</td>
+            </tr>
+            <tr>
+                <th>Alergiep</th>
+                <td>{{ plat.alergiep }}</td>
+            </tr>
+            <tr>
+                <th>Etatp</th>
+                <td>{{ plat.etatp ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Photop</th>
+                <td>{{ plat.photop }}</td>
+            </tr>
+            <tr>
+                <th>Calories</th>
+                <td>{{ plat.calories }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_plat_index') }}">back to list</a>
+
+    <a href="{{ path('app_plat_edit', {'idp': plat.idp}) }}">edit</a>
+
+    {{ include('plat/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avisp index{% endblock %}
+
+{% block body %}
+    <h1>Avisp index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idap</th>
+                <th>Commap</th>
+                <th>Star</th>
+                <th>Fav</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for avisp in avisps %}
+            <tr>
+                <td>{{ avisp.idap }}</td>
+                <td>{{ avisp.commap }}</td>
+                <td>{{ avisp.star }}</td>
+                <td>{{ avisp.fav ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_avisp_show', {'idap': avisp.idap}) }}">show</a>
+                    <a href="{{ path('app_avisp_edit', {'idap': avisp.idap}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_avisp_new') }}">Create new</a>
+{% endblock %}
