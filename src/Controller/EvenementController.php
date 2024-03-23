@@ -12,13 +12,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
-    #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+
+    //afficher tous 
+    #[Route('/all', name: 'app_evenement_index', methods: ['GET'])]
+    public function all(EvenementRepository $evenementRepository): Response
     {
-        return $this->render('evenement/index.html.twig', [
+        return $this->render('evenement/liste_events.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
     }
@@ -106,13 +109,16 @@ class EvenementController extends AbstractController
 
     //liste avec images 
 
-    #[Route('/events', name: 'app_evenement_events', methods: ['GET'])]
-    public function events(EvenementRepository $evenementRepository): Response
+  /*  #[Route('/all-events', name: 'app_evenement_all_events', methods: ['GET'])]
+    public function allEvents(EvenementRepository $evenementRepository): Response
     {
+        $evenements = $evenementRepository->findAll();
+    
         return $this->render('evenement/liste_events.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'evenements' => $evenements,
         ]);
-    }
+    }*/
 
 
 }
+

@@ -23,7 +23,7 @@ class EvenementType extends AbstractType
                 'mapped' => false, // Ne pas mapper ce champ à une propriété de l'entité
                 'required' => false, // Le champ n'est pas obligatoire
             ])
-        ;
+        ; 
     }
 
     public function configureOptions(OptionsResolver $resolver): void

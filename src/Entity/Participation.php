@@ -27,11 +27,23 @@ class Participation
     #[ORM\Column]
     private ?int $age=null;
 
-    #[ORM\ManyToOne(inversedBy: "participations")]
+  /*  #[ORM\ManyToOne(inversedBy: "participations")]
     private ?Evenement $idfEvent=null;
 
     #[ORM\ManyToOne(inversedBy: "participations")]
-    private ?User $idUser=null;
+    private ?User $idUser=null;*/
+
+
+    #[ORM\ManyToOne(targetEntity: Evenement::class, inversedBy: "participations")]
+    #[ORM\JoinColumn(name: 'idf_event', referencedColumnName: 'id_eve')]
+    private ?Evenement $idf_event=null;
+
+
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'id_User', referencedColumnName: 'id')]    
+    private ?User $id_User=null;
+
 
     public function getIdP(): ?int
     {
