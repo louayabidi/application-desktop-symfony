@@ -2,17 +2,30 @@
 
 {% block title %}New Evenement{% endblock %}
 
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a href=""
+			<h3 class="text-center mb-4">Create new Evenement</h3>
+			<h2 class="text-center mb-4">Create new Evenement</h2>
+			<h1 class="text-center mb-4">Create new Evenement</h1> 
 
-
-    {% block content %}
-    <h1>Create new Evenement</h1>
-  
-      <h1>Create new Evenement</h1>
-
-
-    {{ include('evenement/_form.html.twig') }}
-
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
+<span class="icon"><ion-icon name="create" style="font-size: 2rem;"></ion-icon></span>
+             </a>
+            <div class="card">
+                <div class="card-body">
+                    {{ include('evenement/_form.html.twig') }}
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{{ path('app_evenement_index') }}" class="btn btn-secondary">Back to list</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 {% endblock %}
 
 
@@ -220,7 +233,7 @@ Swimming Pool w Healthy diet plan
 
               {#feha commentaires #}
 
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset ('Front/images/testimonials.jpg')}}" data-speed="0.8"></div>
+		{#     <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset ('Front/images/testimonials.jpg')}}" data-speed="0.8"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
@@ -278,6 +291,8 @@ Swimming Pool w Healthy diet plan
 				</div>
 			</div>
 		</div>
+
+		#}
        {% endblock %}
 
        
@@ -385,6 +400,8 @@ Swimming Pool w Healthy diet plan
 
 
 {% block blog %}
+		
+		{#
 		<div class="blog_overlay"></div>
 		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset ('Front/images/blog.jpg')}}" data-speed="0.8"></div>
 		<div class="container">
@@ -442,8 +459,26 @@ Swimming Pool w Healthy diet plan
 
 			</div>
 		</div>
+
+		#}
     {% endblock %}
 
 
 {% block footer %}...{% endblock %}
-{% block javascripts %}...{% endblock %}
+{% block javascripts %}
+<script src="{{asset('Front/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('Front/styles/bootstrap-4.1.2/popper.js')}}"></script>
+<script src="{{asset('Front/styles/bootstrap-4.1.2/bootstrap.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/TweenMax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/TimelineMax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/animation.gsap.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+<script src="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{asset('Front/plugins/easing/easing.js')}}"></script>
+<script src="{{asset('Front/plugins/progressbar/progressbar.min.js')}}"></script>
+<script src="{{asset('Front/plugins/parallax-js-master/parallax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/colorbox/jquery.colorbox-min.js')}}"></script>
+<script src="{{asset('Front/js/custom.js')}}"></script>
+
+{% endblock %}

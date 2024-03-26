@@ -106,7 +106,6 @@ class EvenementController extends AbstractController
     }
 
 
-
     //liste avec images 
 
   /*  #[Route('/all-events', name: 'app_evenement_all_events', methods: ['GET'])]
@@ -118,6 +117,12 @@ class EvenementController extends AbstractController
             'evenements' => $evenements,
         ]);
     }*/
+
+
+
+
+
+
 
 
 }

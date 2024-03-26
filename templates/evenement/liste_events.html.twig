@@ -16,6 +16,8 @@
                         <p class="card-text">Date de fin : {{ evenement.dateFeve|date('d/m/Y') }}</p>
                         <p class="card-text">Adresse : {{ evenement.adresseEve }}</p>
                         <a href="{{ path('app_evenement_show', {'idEve': evenement.idEve}) }}" class="btn btn-primary">Voir détails</a>
+                        <a href="{{ path('app_participation_new', {'idEve': evenement.idEve}) }}" class="btn btn-primary">Participer</a>
+
                     </div>
                 </div>
             </div>

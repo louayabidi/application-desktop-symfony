@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EvenementRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass:EvenementRepository::class)]
 class Evenement
@@ -15,18 +16,22 @@ class Evenement
     private ?int $idEve=null;
 
     #[ORM\Column(length:255)]
+    #[Assert\NotBlank(message:"Le nom de l'evenement est requis")]
     private ?string $nomEve=null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan("today", message: "La date de début ne peut pas être dans le passé.")]
     private ?\DateTime $dateDeve=null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(propertyPath: "dateDeve", message: "La date de fin doit être postérieure à la date de début.")]
     private ?\DateTime $dateFeve=null;
 
     #[ORM\Column]
     private ?int $nbrMax=null;
 
     #[ORM\Column(length:255)]
+    #[Assert\NotBlank(message:"L'adresse' est requis")]
     private ?string  $adresseEve=null;
 
     #[ORM\Column(length:255)]
@@ -108,6 +113,22 @@ class Evenement
 
         return $this;
     }
+
+// Méthode toString pour la classe Evenement
+public function __toString(): string
+{
+    return sprintf(
+        "Événement : %s\nDate : %s à %s\nAdresse : %s",
+        $this->getNomEve() ?? 'N/A',
+        $this->getDateDeve()->format('d/m/Y') ?? 'N/A',
+        $this->getDateFeve()->format('d/m/Y') ?? 'N/A',
+        $this->getAdresseEve() ?? 'N/A'
+    );
+}
+
+
+
+
 
 
 }

@@ -2,10 +2,446 @@
 
 {% block title %}New Participation{% endblock %}
 
-{% block body %}
-    <h1>Create new Participation</h1>
+{% block content %}
+
+<h4>Create new Participation</h4>
+   <h1>Create new Participation</h1>
+   <h4>             </h4>
+    <h4>             </h4>
+   <h1>Create new Participation</h1>
+   
 
     {{ include('participation/_form.html.twig') }}
 
     <a href="{{ path('app_participation_index') }}">back to list</a>
+   
+{% endblock %}
+
+
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{asset('Front/styles/bootstrap-4.1.2/bootstrap.min.css')}}">
+<link href="{{asset('Front/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/plugins/OwlCarousel2-2.2.1/animate.css')}}">
+<link href="{{asset('Front/plugins/colorbox/colorbox.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/styles/main_styles.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/styles/responsive.css')}}">
+{% endblock %}
+
+
+
+     {% block header %}
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
+						<a href="#">
+                        <div class="logo d-flex flex-row align-items-center justify-content-start">
+                        <img src="{{ asset ('Front/images/logo.png')}}" alt="" style="width: 75px;">
+                      <div>Go<span>FIT</span></div>
+                      </div>						
+					  </a>
+						<nav class="main_nav">
+								<ul class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-center">
+								<li class="active"><a href="{{path('app_accueil')}}">Accueil</a></li>
+								    <li><a href="{{path('app_equipement')}} ">Equipement</a></li>
+									<li><a href="{{path('app_reservation')}}">Reservation</a></li>
+									<li><a href="{{path('app_abonnement')}}">Abonnement</a></li>
+									<li><a href="{{path('app_alimentaire')}}">Alimentaire</a></li>
+									<li><a href="{{path('app_evenement')}}">Evenement</a></li>
+									<li><a href="{{path('app_reclamation')}}">Reclamation</a></li>
+							</ul>
+						</nav>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+        {% endblock %}
+
+
+
+
+
+
+  {% block menu %}
+		{#
+		<div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About us</a></li>
+				<li><a href="services.html">Classes & Services</a></li>
+				<li><a href="blog.html">Blog</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+		</div>
+		<div class="menu_phone d-flex flex-row align-items-center justify-content-start">
+			<i class="fa fa-phone" aria-hidden="true"></i>
+				<span>652-345 3222 11</span>
+		</div>
+
+		#}
+        {% endblock %}
+
+
+    
+
+{% block home %}
+
+   
+
+
+   
+      {% endblock %}
+   
+   
+
+ {% block boxes %}
+{#Pilates with trainer   w 
+Swimming Pool w Healthy diet plan
+
+
+
+  
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="boxes_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						
+						<!-- Box -->
+						<div class="box">
+							<div class="box_icon d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ('Front/images/icon_1.png')}}" alt=""></div>
+							<div class="box_title">Pilates with trainer</div>
+							<div class="box_text">
+								<p>Etiam commodo justo nec aliquam feugiat. Donec a leo eget augue porttitor sollicitudin.</p>
+							</div>
+							<div class="box_link_container">
+								<a href="#"><div class="box_link d-flex flex-column align-items-center justify-content-center trans_200"><div>+</div></div></a>
+							</div>
+						</div>
+
+						<!-- Box -->
+						<div class="box">
+							<div class="box_icon d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ('Front/images/icon_2.png')}}" alt=""></div>
+							<div class="box_title">Swimming Pool</div>
+							<div class="box_text">
+								<p>Donec a leo eget augue porttitor sollicitudin. Morbi sed varius risus, vitae molestie lectus. Donec id hendrerit.</p>
+							</div>
+							<div class="box_link_container">
+								<a href="#"><div class="box_link d-flex flex-column align-items-center justify-content-center trans_200"><div>+</div></div></a>
+							</div>
+						</div>
+
+						<!-- Box -->
+						<div class="box">
+							<div class="box_icon d-flex flex-column align-items-center justify-content-center"><img src="{{ asset ('Front/images/icon_3.png')}}" alt=""></div>
+							<div class="box_title">Healthy diet plan</div>
+							<div class="box_text">
+								<p>Morbi sed varius risus, vitae molestie lectus. Donec id hendrerit velit, eu fringilla neque.</p>
+							</div>
+							<div class="box_link_container">
+								<a href="#"><div class="box_link d-flex flex-column align-items-center justify-content-center trans_200"><div>+</div></div></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+       
+
+#}
+{% endblock %}
+
+
+
+
+{% block about %}
+
+{#   feha taswiret mraa#}
+		{#
+		<div class="container about_container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="about_content">
+						<div class="section_title_container">
+							<div class="section_subtitle">welcome to Go FIT</div>
+							<div class="section_title">About <span> Go FIT</span></div>
+						</div>
+						<div class="text_highlight">Etiam commodo justo nec aliquam feugiat. Donec a leo eget eget augue porttitor sollicitudin augue porttitor sollicitudin.</div>
+						<div class="about_text">
+							<p>Morbi sed varius risus, vitae molestie lectus. Donec id hendrerit velit, eu fringilla neque. Etiam id finibus sapien. Donec sollicitudin luctus ex non pharetra. Aenean lobortis ut leo vel porta. Maecenas ac vestibulum lectus. Cras nulla urna, lacinia ut tempor facilisis, congue dignissim tellus. Maecenas ac vestibulum lectus. Cras nulla urna, lacinia ut tempor facilisis, congue dignissim tellus. Phasellus sit amet justo ullamcorper, elementum ipsum nec.</p>
+						</div>
+						<div class="button about_button"><a href="#">Join Now</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="about_background">
+			<div class="container fill_height">
+				<div class="row fill_height">
+					<div class="col-lg-6 offset-lg-6 fill_height">
+						<div class="about_image"><img src="{{ asset ('Front/images/a1.png')}}" alt=""></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		#}
+        {% endblock %}
+
+    {% block testimonials %}
+
+              {#feha commentaires #}
+
+		{#     <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset ('Front/images/testimonials.jpg')}}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="section_title_container">
+						<div class="section_subtitle">welcome to  Go FIT</div>
+						<div class="section_title">Testimonials</div>
+					</div>
+
+					<!-- Testimonial -->
+					<div class="test test_1 d-flex flex-row align-items-start justify-content-start">
+						<div><div class="test_image"><img src="{{ asset ('Front/images/test_1.jpg')}}" alt=""></div></div>
+						<div class="test_content">
+							<div class="test_name"><a href="#">Diane Smith</a></div>
+							<div class="test_title">client</div>
+							<div class="test_text">
+								<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna.</p>
+							</div>
+							<div class="rating rating_4 test_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					
+					<!-- Testimonial -->
+					<div class="test d-flex flex-row align-items-start justify-content-start">
+						<div><div class="test_image"><img src="{{ asset ('Front/images/test_2.jpg')}}" alt=""></div></div>
+						<div class="test_content">
+							<div class="test_name"><a href="#">Diane Smith</a></div>
+							<div class="test_title">client</div>
+							<div class="test_text">
+								<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna.</p>
+							</div>
+							<div class="rating rating_4 test_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						</div>
+					</div>
+
+					<!-- Testimonial -->
+					<div class="test d-flex flex-row align-items-start justify-content-start">
+						<div><div class="test_image"><img src="{{ asset ('Front/images/test_3.jpg')}}" alt=""></div></div>
+						<div class="test_content">
+							<div class="test_name"><a href="#">Diane Smith</a></div>
+							<div class="test_title">client</div>
+							<div class="test_text">
+								<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna.</p>
+							</div>
+							<div class="rating rating_4 test_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="row test_button_row">
+				<div class="col text-center">
+					<div class="button test_button"><a href="#">Join tawwwww</a></div>
+				</div>
+			</div>
+		</div>
+
+		#}
+       {% endblock %}
+
+       
+{% block gallery %}mafih chay {% endblock %}
+
+
+  {% block services %}
+
+{# feha :  Our Courses  #}
+
+		{#<div class="container">
+			<div class="row">  
+				<div class="col">
+					<div class="section_title_container">
+						<div class="section_subtitle">welcome to  Go FIT</div>
+						<div class="section_title">Our Courses</div>
+					</div>
+				</div>
+			</div>
+			<div class="row services_row">
+				
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_4.png')}}" alt=""></div></div>
+							<div class="service_title">Weight Loss Class</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_5.png')}}" alt=""></div></div>
+							<div class="service_title">Yoga Classes</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_6.png')}}" alt=""></div></div>
+							<div class="service_title">Spinning Class</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="Front/images/icon_7.png" alt=""></div></div>
+							<div class="service_title">Private Fit Class</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_8.png')}}" alt=""></div></div>
+							<div class="service_title">Nutrition Classes</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_9.png')}}" alt=""></div></div>
+							<div class="service_title">Pillates Class</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+        #}
+    {% endblock %}
+
+
+
+{% block blog %}
+		
+		{#
+		<div class="blog_overlay"></div>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset ('Front/images/blog.jpg')}}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class=" d-flex flex-row align-items-start justify-content-start">
+						<div class="section_title_container">
+							<div class="section_subtitle">welcome to  Go FIT</div>
+							<div class="section_title">The Blog</div>
+						</div>
+						<div class="all_posts_link ml-auto"><a href="#">View all blog posts</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="row blog_row">
+				
+				<!-- Blog Post -->
+				<div class="col-lg-4 blog_col">
+					<div class="blog_post">
+						<div class="blog_post_image"><img src="{{ asset ('Front/images/blog_1.jpg')}}" alt=""></div>
+						<div class="blog_post_title"><a href="#">Tips for the perfect body</a></div>
+						<div class="blog_post_date"><a href="#">june 29, 2018</a></div>
+						<div class="blog_post_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Odio vestibulum est mattis effic iturut.</p>
+						</div>
+						<div class="blog_post_link"><a href="#">Read More</a></div>
+					</div>
+				</div>
+
+				<!-- Blog Post -->
+				<div class="col-lg-4 blog_col">
+					<div class="blog_post">
+						<div class="blog_post_image"><img src="{{ asset ('Front/images/blog_2.jpg')}}" alt=""></div>
+						<div class="blog_post_title"><a href="#">Tips for the perfect body</a></div>
+						<div class="blog_post_date"><a href="#">june 29, 2018</a></div>
+						<div class="blog_post_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Odio vestibulum est mattis effic iturut.</p>
+						</div>
+						<div class="blog_post_link"><a href="#">Read More</a></div>
+					</div>
+				</div>
+
+				<!-- Blog Post -->
+				<div class="col-lg-4 blog_col">
+					<div class="blog_post">
+						<div class="blog_post_image"><img src="{{ asset ('Front/images/blog_3.jpg')}}" alt=""></div>
+						<div class="blog_post_title"><a href="#">Video: Pilates 4 Begginers</a></div>
+						<div class="blog_post_date"><a href="#">june 29, 2018</a></div>
+						<div class="blog_post_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Odio vestibulum est mattis effic iturut.</p>
+						</div>
+						<div class="blog_post_link"><a href="#">Read More</a></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		#}
+    {% endblock %}
+
+
+{% block footer %}...{% endblock %}
+{% block javascripts %}
+<script src="{{asset('Front/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('Front/styles/bootstrap-4.1.2/popper.js')}}"></script>
+<script src="{{asset('Front/styles/bootstrap-4.1.2/bootstrap.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/TweenMax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/TimelineMax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/animation.gsap.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+<script src="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{asset('Front/plugins/easing/easing.js')}}"></script>
+<script src="{{asset('Front/plugins/progressbar/progressbar.min.js')}}"></script>
+<script src="{{asset('Front/plugins/parallax-js-master/parallax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/colorbox/jquery.colorbox-min.js')}}"></script>
+<script src="{{asset('Front/js/custom.js')}}"></script>
+
 {% endblock %}
