@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'evenement/evenementback.html.twig' %}
 
 {% block title %}Edit Evenement{% endblock %}
 
-{% block body %}
+{% block louay %}
     <h1>Edit Evenement</h1>
 
     {{ include('evenement/_form.html.twig', {'button_label': 'Update'}) }}
@@ -11,3 +11,5 @@
 
     {{ include('evenement/_delete_form.html.twig') }}
 {% endblock %}
+
+
