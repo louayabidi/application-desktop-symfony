@@ -26,8 +26,19 @@ class EvenementController extends AbstractController
         ]);
     }
 
+
+
+    #[Route('/allback', name: 'app_evenement_indexback', methods: ['GET'])]
+    public function allback(EvenementRepository $evenementRepository): Response
+    {
+        return $this->render('evenement/table.html.twig', [
+            'evenements' => $evenementRepository->findAll(),
+        ]);
+    }
+
+
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, EvenementRepository $evenementRepository): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
@@ -56,6 +67,20 @@ class EvenementController extends AbstractController
                 $evenement->setImageEve($newFilename);
             }
     
+            // Vérifier si un événement avec le même nom et la même date de début existe déjà
+            $existingEvent = $evenementRepository->findOneBy([
+                'nomEve' => $evenement->getNomEve(),
+                'dateDeve' => $evenement->getDateDeve()
+            ]);
+    
+            if ($existingEvent) {
+                // Afficher un message d'erreur
+                $this->addFlash('error', 'Un événement avec le même nom et la même date de début existe déjà.');
+                // Rediriger vers la page de création de l'événement
+                return $this->redirectToRoute('app_evenement_new');
+            }
+    
+            // Le nouvel événement est unique, procéder à la persistance
             $entityManager->persist($evenement);
             $entityManager->flush();
     
@@ -68,6 +93,17 @@ class EvenementController extends AbstractController
         ]);
     }
 
+
+
+
+
+
+
+
+
+
+
+    
     #[Route('/{idEve}', name: 'app_evenement_show', methods: ['GET'])]
     public function show(Evenement $evenement): Response
     {
@@ -75,6 +111,8 @@ class EvenementController extends AbstractController
             'evenement' => $evenement,
         ]);
     }
+
+
 
     #[Route('/{idEve}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
@@ -102,7 +140,7 @@ class EvenementController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_evenement_indexback', [], Response::HTTP_SEE_OTHER);
     }
 
 

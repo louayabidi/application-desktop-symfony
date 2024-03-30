@@ -5,9 +5,16 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EvenementRepository;
+use Doctrine\DBAL\Schema\UniqueConstraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass:EvenementRepository::class)]
+
+
+#[ORM\Table(name: 'evenement', uniqueConstraints: [
+    new UniqueConstraint(name: 'unique_evenement_nom_date', columns: ['nomEve', 'dateDeve'])
+])]
+
 class Evenement
 {
     #[ORM\Id]

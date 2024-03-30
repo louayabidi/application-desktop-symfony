@@ -159,7 +159,7 @@ class ParticipationController extends AbstractController
     {
         $statistics = $participationRepository->getParticipantsCountByEvent();
 
-        return $this->render('participation/index.html.twig', [
+        return $this->render('participation/statistics.html.twig', [
             'statistics' => $statistics,
         ]);
     }
