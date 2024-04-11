@@ -37,6 +37,8 @@
                 <td>
                     <a href="{{ path('app_participation_show', {'idP': participation.idP}) }}">show</a>
                     <a href="{{ path('app_participation_edit', {'idP': participation.idP}) }}">edit</a>
+                    <a href="{{ path('app_generate_certificate', {'idP': participation.idP}) }}">Certif</a>
+
                 </td>
             </tr>
         {% else %}
