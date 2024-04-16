@@ -61,16 +61,22 @@ public function search($term)
 
 
    //////////trie//////////////
-public function getParticipantsCountByEvent(): array
-{
-    return $this->createQueryBuilder('p')
-        ->select('COUNT(p.idP) as participantsCount', 'e.nomEve as eventName')
-        ->leftJoin('p.idf_event', 'e')
-        ->groupBy('e.nomEve')
-        ->getQuery()
-        ->getResult();
-}
-
+   public function getParticipantsCountByEvent(): array
+   {
+       $qb = $this->createQueryBuilder('p')
+           ->select('COUNT(p.idP) as participantsCount, e.nomEve as eventName')
+           ->leftJoin('p.idf_event', 'e')
+           ->groupBy('e.nomEve');
+   
+       $results = $qb->getQuery()->getResult();
+   
+       return array_map(function ($row) {
+           return (object) [
+               'eventName' => $row['eventName'],
+               'participantCount' => $row['participantsCount'],
+           ];
+       }, $results);
+   }
 
 
 

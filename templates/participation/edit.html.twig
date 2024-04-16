@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+
+{% extends 'evenement/evenementback.html.twig' %}
 
 {% block title %}Edit Participation{% endblock %}
 
-{% block body %}
+{% block louay %}
     <h1>Edit Participation</h1>
 
     {{ include('participation/_form.html.twig', {'button_label': 'Update'}) }}

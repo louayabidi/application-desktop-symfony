@@ -1,9 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'evenement/evenement.html.twig' %}
 
-{% block title %}Tous les événements{% endblock %}
+
 
 {% block content %}
+    <style>
+        .card-img-top {
+            height: 400px; /* Hauteur fixe pour toutes les images */
+            object-fit: cover; /* Ajustement de la taille de l'image pour remplir le conteneur */
+        }
+    </style>
+
     <h1>Tous les événements</h1>
+    <h2>   ............</h2>
+    <<div class="col text-center">
+            <h1>Nos événements</h1>
+        </div>
+
+    
     
     <div class="row">
         {% for evenement in evenements %}
@@ -17,7 +30,6 @@
                         <p class="card-text">Adresse : {{ evenement.adresseEve }}</p>
                         <a href="{{ path('app_evenement_show', {'idEve': evenement.idEve}) }}" class="btn btn-primary">Voir détails</a>
                         <a href="{{ path('app_participation_new', {'idEve': evenement.idEve}) }}" class="btn btn-primary">Participer</a>
-
                     </div>
                 </div>
             </div>

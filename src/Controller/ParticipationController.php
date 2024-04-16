@@ -30,33 +30,39 @@ class ParticipationController extends AbstractController
         } else {
             $participations = $participationRepository->findAll();
         }
-    
+        
+
+
         // Récupérer les statistiques
-        $statistics = $participationRepository->getParticipantsCountByEvent();
-    
-        return $this->render('participation/index.html.twig', [
-            'participations' => $participations,
-            'statistics' => $statistics, // Passer les statistiques à la vue
-        ]);
+    $statistics = $participationRepository->getParticipantsCountByEvent();
+
+    return $this->render('participation/index.html.twig', [
+        'participations' => $participations,
+        'statistics' => $statistics, // Passer les statistiques à la vue
+    ]);
+       
     }
 
     //////////////////recherche///////////////
 
     #[Route('/search', name: 'app_participation_search', methods: ['GET'])]
-    public function search(Request $request, ParticipationRepository $participationRepository): Response
-    {
-        $searchTerm = $request->query->get('search');
+public function search(Request $request, ParticipationRepository $participationRepository): Response
+{
+    $searchTerm = $request->query->get('search');
 
-        if ($searchTerm) {
-            $participations = $participationRepository->search($searchTerm);
-        } else {
-            $participations = [];
-        }
-
-        return $this->render('participation/index.html.twig', [
-            'participations' => $participations,
-        ]);
+    if ($searchTerm) {
+        $participations = $participationRepository->search($searchTerm);
+        $statistics = $participationRepository->getParticipantsCountByEvent();
+    } else {
+        $participations = [];
+        $statistics = [];
     }
+
+    return $this->render('participation/index.html.twig', [
+        'participations' => $participations,
+        'statistics' => $statistics,
+    ]);
+}
 
 
 
@@ -154,16 +160,8 @@ class ParticipationController extends AbstractController
 
     //////trie/////////
 
-    #[Route('/statistics', name: 'app_participation_statistics')]
-    public function statistics(ParticipationRepository $participationRepository): Response
-    {
-        $statistics = $participationRepository->getParticipantsCountByEvent();
+  
 
-        return $this->render('participation/statistics.html.twig', [
-            'statistics' => $statistics,
-        ]);
-    }
-
-
+  
 
 }

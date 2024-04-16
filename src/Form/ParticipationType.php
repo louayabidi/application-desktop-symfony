@@ -16,7 +16,7 @@ class ParticipationType extends AbstractType
             ->add('prenomP')
             ->add('email')
             ->add('age')
-            ->add('idf_event')
+            //->add('idf_event')
             ->add('id_User')
         ;
     }

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block body %}
+    <h1>Statistics</h1>
+
+    <!-- Graphique pour afficher les statistiques -->
+    <canvas id="myChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Récupérer les données des statistiques passées depuis le contrôleur
+            var statistics = {{ statistics|json_encode|raw }};
+
+            // Préparer les données pour le graphique
+            var labels = [];
+            var data = [];
+
+            statistics.forEach(function(stat) {
+                labels.push(stat.eventName);
+                data.push(stat.participantCount);
+            });
+
+            // Créer le graphique
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Participants',
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

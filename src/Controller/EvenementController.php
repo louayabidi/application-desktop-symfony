@@ -7,10 +7,14 @@ use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 #[Route('/evenement')]
@@ -95,23 +99,14 @@ class EvenementController extends AbstractController
 
 
 
-
-
-
-
-
-
-
-
-    
-    #[Route('/{idEve}', name: 'app_evenement_show', methods: ['GET'])]
-    public function show(Evenement $evenement): Response
-    {
+/*    #[Route('/{idEve}', name: 'app_evenement_show', methods: ['GET'])]
+public function show(#[ParamConverter('evenement', options: ['mapping' => ['idEve' => 'idEve']])] Evenement $evenement): Response
+{
         return $this->render('evenement/show.html.twig', [
             'evenement' => $evenement,
         ]);
     }
-
+*/
 
 
     #[Route('/{idEve}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
@@ -142,26 +137,84 @@ class EvenementController extends AbstractController
 
         return $this->redirectToRoute('app_evenement_indexback', [], Response::HTTP_SEE_OTHER);
     }
-
-
-    //liste avec images 
-
-  /*  #[Route('/all-events', name: 'app_evenement_all_events', methods: ['GET'])]
-    public function allEvents(EvenementRepository $evenementRepository): Response
-    {
-        $evenements = $evenementRepository->findAll();
     
-        return $this->render('evenement/liste_events.html.twig', [
-            'evenements' => $evenements,
+   
+
+
+
+    #[Route('/evenement/{idEve}', name: 'app_evenement_show')]
+    public function show(Evenement $evenement): Response
+    {
+        return $this->render('evenement/show.html.twig', [
+            'evenement' => $evenement,
         ]);
-    }*/
+    }
 
 
 
+    #[Route('/calendar', name: 'app_evenement_calendar', methods: ['GET'])]
+    public function calendar(): Response
+    {
+        $httpClient = HttpClient::create();
+        $url = 'http://exemple.com/api';
+        $response = $httpClient->request('GET', '$url');
+        $events = $response->toArray();
+
+        return $this->render('evenement/calendar.html.twig', [
+            'events' => $events,
+        ]);
+    }
 
 
+    #[Route('/weather', name: 'app_weather')]
+    public function weather(): Response
+    {
+        return $this->render('evenement/weather.html.twig');
+    }
 
+    #[Route('/weather-data', name: 'app_weather_data')]
+    public function weatherData(): Response
+    {
+        $apiKey = 'be879e24600ae11dc004c73f0de0d4a1        '; // Remplacer par votre clé API OpenWeatherMap
+        $city = $_GET['city'] ?? ''; // Récupérer la ville depuis les paramètres GET
 
+        if (empty($city)) {
+            // Retourner une erreur si aucune ville n'est spécifiée
+            return new Response('City parameter is missing', Response::HTTP_BAD_REQUEST);
+        }
 
+        // URL de l'API météo actuelle
+        $currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}";
+
+        // Faire une requête à l'API
+        $httpClient = HttpClient::create();
+        $response = $httpClient->request('GET', $currentWeatherUrl);
+
+        // Vérifier si la requête a réussi
+        if ($response->getStatusCode() === Response::HTTP_OK) {
+            // Récupérer les données de réponse au format JSON
+            $data = $response->toArray();
+
+            // Convertir la température en degrés Celsius
+            $temperature = round($data['main']['temp'] - 273.15);
+
+            // Préparer les données à renvoyer au format JSON
+            $weatherData = [
+                'city' => $data['name'],
+                'temperature' => $temperature,
+                'description' => $data['weather'][0]['description'],
+                'icon' => $data['weather'][0]['icon']
+            ];
+
+            // Convertir les données en JSON et les renvoyer
+            return $this->json($weatherData);
+        }
+
+        // En cas d'erreur, retourner un message d'erreur
+        return new Response('Error fetching weather data', $response->getStatusCode());
+    }
 }
+
+    
+
 

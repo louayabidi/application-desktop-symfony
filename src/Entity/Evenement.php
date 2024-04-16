@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Schema\UniqueConstraint;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass:EvenementRepository::class)]
@@ -133,7 +134,12 @@ public function __toString(): string
     );
 }
 
-
+// Ajoutez cette méthode pour obtenir l'URL de l'événement
+public function getUrl(UrlGeneratorInterface $urlGenerator): string
+{
+    // Remplacez 'app_evenement_show' par le nom de votre route pour afficher les détails de l'événement
+    return $urlGenerator->generate('app_evenement_show', ['idEve' => $this->getIdEve()]);
+}
 
 
 

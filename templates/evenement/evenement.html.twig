@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title> {% block titre %}Go FIT {% endblock %}</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content=" Go FIT template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ {% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{asset('Front/styles/bootstrap-4.1.2/bootstrap.min.css')}}">
+<link href="{{asset('Front/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/plugins/OwlCarousel2-2.2.1/animate.css')}}">
+<link href="{{asset('Front/plugins/colorbox/colorbox.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/styles/main_styles.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('Front/styles/responsive.css')}}">
+{% endblock %}
+</head>
+<body>
+
+<div class="super_container">
+	{% block content %} 
+    
+    {% endblock %}
+	<!-- Header -->
+
+	<header class="header">
+     {% block header %}
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
+						<a href="#">
+                        <div class="logo d-flex flex-row align-items-center justify-content-start">
+                        <img src="{{ asset ('Front/images/logo.png')}}" alt="" style="width: 75px;">
+                      <div>Go<span>FIT</span></div>
+                      </div>						
+					  </a>
+						<nav class="main_nav">
+								<ul class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-center">
+								<li class="active"><a href="{{path('app_accueil')}}">Accueil</a></li>
+								    <li><a href="{{path('app_equipement')}} ">Equipement</a></li>
+									<li><a href="{{path('app_reservation')}}">Reservation</a></li>
+									<li><a href="{{path('app_abonnement')}}">Abonnement</a></li>
+									<li><a href="{{path('app_alimentaire')}}">Alimentaire</a></li>
+									<li><a href="{{path('app_evenement')}}">Evenement</a></li>
+									<li><a href="{{path('app_reclamation')}}">Reclamation</a></li>
+							</ul>
+						</nav>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+        {% endblock %}
+	</header>
+
+
+
+    {% block louay %}
+
+
+    {% endblock %}
+
+	<!-- Hamburger -->
+
+	<div class="hamburger_bar trans_400 d-flex flex-row align-items-center justify-content-start">
+		<div class="hamburger">
+			<div class="menu_toggle d-flex flex-row align-items-center justify-content-start">
+				<span>menu</span>
+				<div class="hamburger_container">
+					<div class="menu_hamburger">
+						<div class="line_1 hamburger_lines" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
+						<div class="line_2 hamburger_lines" style="visibility: inherit; opacity: 1;"></div>
+						<div class="line_3 hamburger_lines" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Menu -->
+
+	<div class="menu trans_800">
+    {% block menu %}
+		
+        {% endblock %}
+	</div>
+
+	<!-- Home -->
+
+	<div class="home">
+     {% block home %}
+		
+    {% endblock %}
+	</div>
+
+	<!-- Boxes -->
+
+
+  {% block lou %}
+		
+    {% endblock %}
+
+
+	<div class="boxes">
+     {% block boxes %}
+		
+						
+		
+       {% endblock %}
+	</div>
+
+	<!-- About -->
+
+	<div class="about">
+    {% block about %}
+		<div class="container about_container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="about_content">
+						<div class="section_title_container">
+							<div class="section_subtitle">welcome to Go FIT</div>
+							<div class="section_title"> <span> Go FIT</span></div>
+						</div>
+						<div class="text_highlight"> Notre application web facilite la gestion d'une salle de sport en intégrant plusieurs fonctionnalités essentielles : planification d'événements, réservation de séances, gestion des repas, traitement des réclamations. En encourageant activement les membres à rester actifs, nous offrons une expérience complète pour soutenir leur parcours de remise en forme</div>
+						<div class="about_text">
+							<p> Le plus difficile dans l'exercice physique, c'est souvent de franchir la première étape. Mais rappelez-vous, chaque pas vous rapproche de vos objectifs de santé et de bien-être. Alors, pourquoi attendre ? Lancez-vous dès maintenant et ressentez la satisfaction et l'énergie que seul le sport peut vous procurer   </p>
+						</div>
+						<div class="button about_button"><a href="#">Adhérer maintenantJoin Now</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="about_background">
+			<div class="container fill_height">
+				<div class="row fill_height">
+					<div class="col-lg-6 offset-lg-6 fill_height">
+						<div class="about_image"><img src="{{ asset ('Front/images/a1.png')}}" alt=""></div>
+					</div>
+				</div>
+			</div>
+		</div>
+        {% endblock %}
+	</div>
+
+	<!-- Testimonials -->
+
+	<div class="testimonials">
+    {% block testimonials %}
+		
+       {% endblock %}
+	</div>
+
+	<!-- Gallery -->
+
+	<div class="gallery">
+		{% block gallery %}
+		<!-- Gallery Slider -->
+		<div class="gallery_slider_container">
+			<div class="owl-carousel owl-theme gallery_slider">
+				
+				<!-- Slide -->
+				<div class="owl-item"><img src="{{ asset ('Front/images/gallery_3.jpg')}}" alt=""></div>
+
+				<!-- Slide -->
+				<div class="owl-item"><img src="{{ asset ('Front/images/gallery_4.jpg')}}" alt=""></div>
+
+				<!-- Slide -->
+				<div class="owl-item"><img src="{{ asset ('Front/images/gallery_5.jpg')}}" alt=""></div>
+
+				<!-- Slide -->
+				<div class="owl-item"><img src="{{ asset ('Front/images/gallery_1.jpg')}}" alt=""></div>
+
+				<!-- Slide -->
+				<div class="owl-item"><img src="{{ asset ('Front/images/gallery_2.jpg')}}" alt=""></div>
+
+			</div>
+		</div>
+      {% endblock %}
+	</div>
+
+	<!-- Services -->
+
+	<div class="services">
+    {% block services %}
+		<div class="container">
+			<div class="row">  
+				<div class="col">
+					<div class="section_title_container">
+						<div class="section_subtitle">welcome to  Go FIT</div>
+						<div class="section_title">Nos cours </div>
+					</div>
+				</div>
+			</div>
+			<div class="row services_row">
+				
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_4.png')}}" alt=""></div></div>
+							<div class="service_title">Weight Loss Class</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_5.png')}}" alt=""></div></div>
+							<div class="service_title">Yoga Classes</div>
+						</div>
+						<div class="service_text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_4.png')}}" alt=""></div></div>
+							<div class="service_title">Cours de Perte de Poids</div>
+						</div>
+						<div class="service_text">
+							<p>Brûlez des calories et tonifiez votre corps avec notre programme de cours de perte de poids.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_5.png')}}" alt=""></div></div>
+							<div class="service_title">Cours de Yoga</div>
+						</div>
+						<div class="service_text">
+							<p>Retrouvez l'équilibre mental et physique avec nos cours de yoga relaxants et revitalisants.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_6.png')}}" alt=""></div></div>
+							<div class="service_title">Cours de Spinning</div>
+						</div>
+						<div class="service_text">
+							<p>Augmentez votre endurance et votre force avec nos cours de spinning énergisants.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_8.png')}}" alt=""></div></div>
+							<div class="service_title">Cours de Nutrition</div>
+						</div>
+						<div class="service_text">
+							<p>Apprenez à nourrir votre corps correctement pour maximiser vos performances avec nos cours de nutrition.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="col-xl-4 col-md-6 service_col">
+					<div class="service">
+						<div class="service_title_container d-flex flex-row align-items-center justify-content-start">
+							<div><div class="service_icon"><img src="{{ asset ('Front/images/icon_9.png')}}" alt=""></div></div>
+							<div class="service_title">Cours de Pilates</div>
+						</div>
+						<div class="service_text">
+							<p>Renforcez votre noyau, améliorez votre posture et développez votre souplesse avec nos cours de Pilates.</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+    {% endblock %}
+	</div>
+
+
+
+
+
+
+
+	<!-- Blog -->
+
+	<div class="blog">
+    {% block blog %}
+		<div class="blog_overlay"></div>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{ asset ('Front/images/blog.jpg')}}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class=" d-flex flex-row align-items-start justify-content-start">
+						<div class="section_title_container">
+							<div class="section_subtitle">Bienvenue sur Go FIT</div>
+							<div class="section_title">Le Blog</div>
+						</div>
+						<div class="all_posts_link ml-auto"><a href="#">Voir tous les articles du blog</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="row blog_row">
+				
+				<!-- Article du Blog -->
+				<div class="col-lg-4 blog_col">
+					<div class="blog_post">
+						<div class="blog_post_image"><img src="{{ asset ('Front/images/blog_1.jpg')}}" alt=""></div>
+						<div class="blog_post_title"><a href="#">Conseils pour un corps parfait</a></div>
+						<div class="blog_post_date"><a href="#">29 juin 2018</a></div>
+						<div class="blog_post_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Odio vestibulum est mattis effic iturut.</p>
+						</div>
+						<div class="blog_post_link"><a href="#">Lire la suite</a></div>
+					</div>
+				</div>
+
+				<!-- Article du Blog -->
+				<div class="col-lg-4 blog_col">
+					<div class="blog_post">
+						<div class="blog_post_image"><img src="{{ asset ('Front/images/blog_2.jpg')}}" alt=""></div>
+						<div class="blog_post_title"><a href="#">Conseils pour un corps parfait</a></div>
+						<div class="blog_post_date"><a href="#">29 juin 2018</a></div>
+						<div class="blog_post_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Odio vestibulum est mattis effic iturut.</p>
+						</div>
+						<div class="blog_post_link"><a href="#">Lire la suite</a></div>
+					</div>
+				</div>
+
+				<!-- Article du Blog -->
+				<div class="col-lg-4 blog_col">
+					<div class="blog_post">
+						<div class="blog_post_image"><img src="{{ asset ('Front/images/blog_3.jpg')}}" alt=""></div>
+						<div class="blog_post_title"><a href="#">Vidéo : Pilates pour débutants</a></div>
+						<div class="blog_post_date"><a href="#">29 juin 2018</a></div>
+						<div class="blog_post_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Odio vestibulum est mattis effic iturut.</p>
+						</div>
+						<div class="blog_post_link"><a href="#">Lire la suite</a></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+    {% endblock %}
+	</div>
+
+
+{% block body %}{% endblock %}
+
+	<!-- Footer -->
+
+	<footer class="footer">
+    {% block footer %}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="footer_container">
+						<div class="footer_content">
+							<div class="footer_logo">
+								<a href="#">
+									<div class="logo d-flex flex-row align-items-center justify-content-center"><img src="{{ asset ('Front/images/logo.png')}}" alt="" style="width: 80px;"><div>Go<span>FIT</span></div></div>
+								</a>
+							</div>
+							<nav class="footer_nav">
+								<ul class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-center">
+									<li><a href="{{path('app_apropos')}}">A propos</a></li>
+									<li><a href="{{path('app_contact')}}">Contact</a></li>
+								</ul>
+							</nav>
+							<div class="newsletter_container">
+								<form action="#" id="newsletter_form" class="newsletter_form">
+									<input type="text" class="newsletter_input" placeholder="Enter your email here" required="required">
+									<button class="newsletter_button">go</button>
+								</form>
+							</div>
+							<div class="copyright d-flex flex-row align-items-start justify-content-sm-end justify-content-center"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+						</div>
+						<div class="footer_image text-center"><img src="{{ asset ('Front/images/footer.png')}}" alt=""></div>
+					</div>
+				</div>
+			</div>
+		</div>
+       {% endblock %}
+	</footer>
+</div>
+{% block javascripts %}
+<script src="{{asset('Front/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('Front/styles/bootstrap-4.1.2/popper.js')}}"></script>
+<script src="{{asset('Front/styles/bootstrap-4.1.2/bootstrap.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/TweenMax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/TimelineMax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/animation.gsap.min.js')}}"></script>
+<script src="{{asset('Front/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+<script src="{{asset('Front/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{asset('Front/plugins/easing/easing.js')}}"></script>
+<script src="{{asset('Front/plugins/progressbar/progressbar.min.js')}}"></script>
+<script src="{{asset('Front/plugins/parallax-js-master/parallax.min.js')}}"></script>
+<script src="{{asset('Front/plugins/colorbox/jquery.colorbox-min.js')}}"></script>
+<script src="{{asset('Front/js/custom.js')}}"></script>
+ {% endblock %}
+</body>
+</html>
