@@ -66,11 +66,31 @@ public function search(Request $request, ParticipationRepository $participationR
 
 
 
-
-
-    #[Route('/addparticipation', name: 'app_participation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+#[Route('/addparticipation', name: 'app_participation_new', methods: ['GET', 'POST'])]
+public function new(Request $request, EntityManagerInterface $entityManager, ParticipationRepository $participationRepository): Response
 {
+    // Récupérer l'ID de l'événement à partir de la requête
+    $idEve = $request->query->get('idEve');
+
+    // Si l'ID de l'événement n'est pas récupéré, rediriger vers une autre page ou afficher un message d'erreur
+    if (!$idEve) {
+        // Rediriger vers une autre page ou afficher un message d'erreur
+    }
+
+    // Charger l'entité Evenement correspondante à partir de la base de données
+    $evenement = $entityManager->getRepository(Evenement::class)->find($idEve);
+
+    // Si l'événement n'est pas trouvé, rediriger vers une autre page ou afficher un message d'erreur
+    if (!$evenement) {
+        // Rediriger vers une autre page ou afficher un message d'erreur
+    }
+
+    // Vérifier si le nombre maximum de participants est atteint
+    if ($evenement->getNbrMax() !== null && count($participationRepository->findBy(['idf_event' => $evenement->getIdEve()])) >= $evenement->getNbrMax()) {
+        // Rediriger vers la page de fermeture de l'événement avec l'image
+        return $this->redirectToRoute('app_evenement_close');
+    }
+
     // Créer une nouvelle instance de Participation
     $participation = new Participation();
 
@@ -82,31 +102,18 @@ public function search(Request $request, ParticipationRepository $participationR
 
     // Vérifier si le formulaire est soumis et valide
     if ($form->isSubmitted() && $form->isValid()) {
-        // Récupérer l'ID de l'événement à partir de la requête
-        $idEve = $request->query->get('idEve');
+        // Définir l'événement dans la participation
+        $participation->setIdfEvent($evenement);
 
-        // Si l'ID de l'événement est récupéré avec succès
-        if ($idEve) {
-            // Charger l'entité Evenement correspondante à partir de la base de données
-            $evenement = $entityManager->getRepository(Evenement::class)->find($idEve);
+        // Persister la nouvelle participation
+        $entityManager->persist($participation);
+        // Appliquer les changements à la base de données
+        $entityManager->flush();
 
-            // Si l'événement est trouvé
-            if ($evenement) {
-                // Définir l'événement dans la participation
-                $participation->setIdfEvent($evenement);
-
-                // Persister la nouvelle participation
-                $entityManager->persist($participation);
-                // Appliquer les changements à la base de données
-                $entityManager->flush();
-
-                // Rediriger vers une autre page après la création de la participation
-                return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
-            }
-        }
+        // Rediriger vers une autre page après la création de la participation
+        return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    // Si le formulaire n'est pas soumis ou n'est pas valide, ou si l'ID de l'événement n'est pas récupéré
     // Afficher à nouveau le formulaire de création de participation
     return $this->renderForm('participation/new.html.twig', [
         'participation' => $participation,
@@ -160,7 +167,13 @@ public function search(Request $request, ParticipationRepository $participationR
 
     //////trie/////////
 
-  
+    #[Route('/close', name: 'app_participation_close', methods: ['POST'])]
+    public function close(Request $request, Participation $participation, EntityManagerInterface $entityManager): Response
+    {
+       
+
+        return $this->renderForm('participation/closeevent.html.twig');
+    }
 
   
 

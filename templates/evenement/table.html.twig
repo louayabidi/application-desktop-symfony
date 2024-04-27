@@ -1,64 +1,45 @@
-
-
 {% extends 'evenement/evenementback.html.twig' %}
+
 {% block louay %}
     <h1>Liste des événements</h1>
 
+    <div class="d-flex">
+        <a href="{{ path('app_evenement_archive') }}" class="btn btn-sm ml-3 btn-success">Archives des événements</a>
+    </div>
 
-
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.5/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.5/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.5/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap@6.1.5/index.global.min.js"></script>
-
-
+    <form action="{{ path('app_evenement_search') }}" method="GET" class="my-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Rechercher...">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+    </form>
 
     <table class="table">
         <thead>
             <tr>
-                
                 <th>Nom</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>ImageEve</th>
-                <!-- Ajoutez d'autres en-têtes au besoin -->
             </tr>
         </thead>
-        <div>
+        <tbody>
             {% for evenement in evenements %}
                 <tr>
-                  
                     <td>{{ evenement.nomEve }}</td>
                     <td>{{ evenement.dateDeve|date('Y-m-d H:i:s') }}</td>
                     <td>{{ evenement.dateFeve|date('Y-m-d H:i:s') }}</td>
-                    
-                
-                <td><img src="{{ asset('uploads/images/evenements/' ~ evenement.imageEve) }}" alt="Image de l'événement" style="width: 200px; height: 200px;;"></td>
-                 <td><a href="{{ path('app_evenement_edit', {'idEve': evenement.idEve}) }}">edit</a></td>
-                       <td>{{ include('evenement/_delete_form.html.twig') }}</td>
-
-                    <!-- Ajoutez d'autres colonnes au besoin -->
+                    <td><img src="{{ asset('uploads/images/evenements/' ~ evenement.imageEve) }}" alt="Image de l'événement" style="width: 200px; height: 200px;"></td>
+                    <td><a href="{{ path('app_evenement_edit', {'idEve': evenement.idEve}) }}">edit</a></td>
+                    <td>{{ include('evenement/_delete_form.html.twig') }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
+    <div id="calendar"></div>
 
-    
-
-<div id="calendar"></div>
-
-<script src="{{ asset('public\Front\js\calendar.js') }}"></script>
-
-
-
+    <script src="{{ asset('public/Front/js/calendar.js') }}"></script>
 {% endblock %}
-
-
-
-
-
-
-

@@ -3,6 +3,7 @@
 {% block title %}New Participation{% endblock %}
 
 {% block boxes %}
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -15,6 +16,8 @@
                         <div class="form-group">
                             {{ form_widget(form) }}
                         </div>
+
+
                         <button type="submit" class="btn btn-primary btn-block">Save</button>
                         {{ form_end(form) }}
                     </div>
@@ -25,7 +28,11 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
+
+
+
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('Front/styles/bootstrap-4.1.2/bootstrap.min.css') }}">
@@ -37,4 +44,7 @@
             margin-top: 20px;
         }
     </style>
+
+
 {% endblock %}
+

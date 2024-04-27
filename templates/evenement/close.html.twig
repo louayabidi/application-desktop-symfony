@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evenement plein</title>
+    <style>
+        /* Réinitialisation des marges et des rembourrages */
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Définir l'image en arrière-plan */
+        body {
+         
+            background-image: url('{{ asset('certificat_image/closet.png') }}'); /* Remplacez 'chemin_vers_votre_image.jpg' par le chemin de votre image */
+            background-size: cover; /* Pour que l'image couvre toute la page */
+            background-position: center; /* Pour centrer l'image */
+            height: 100vh; /* Pour que l'image occupe toute la hauteur de la fenêtre */
+        }
+
+        /* Styles supplémentaires si nécessaire */
+        /* Par exemple, pour centrer le contenu au milieu de la page */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white; /* Pour que le texte soit visible sur l'image */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!-- Votre contenu HTML ici -->
+       
+    </div>
+</body>
+</html>

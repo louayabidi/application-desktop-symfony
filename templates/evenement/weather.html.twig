@@ -1,3 +1,5 @@
+
+{#
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,27 +24,27 @@
     </div>
 
     <script>
-        function getWeather() {
-            const city = document.getElementById('city').value;
+       function getWeather() {
+    const city = document.getElementById('city').value;
 
-            if (!city) {
-                alert('Please enter a city');
-                return;
-            }
+    if (!city) {
+        alert('Please enter a city');
+        return;
+    }
 
-            // URL de l'action du contrôleur pour récupérer les données météo
-            const url = '{{ path('app_weather_data') }}' + '?city=' + encodeURIComponent(city);
+    // URL of the API endpoint for fetching weather data
+    const url = '/weather-data?city=' + encodeURIComponent(city);
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    displayWeather(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching weather data:', error);
-                    alert('Error fetching weather data. Please try again.');
-                });
-        }
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            displayWeather(data);
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            alert('Error fetching weather data. Please try again.');
+        });
+}
 
         function displayWeather(data) {
             const tempDivInfo = document.getElementById('temp-div');
@@ -61,3 +63,110 @@
     </script>
 </body>
 </html>
+
+
+men hna code akher 
+
+
+
+{% block title %}Weather{% endblock %}
+
+{% block content %}
+   <div id="weather-container">
+    <h2>Weather App</h2>
+
+    <form id="weather-search-form" action="{{ path('app_weather_data') }}" method="POST">
+    <button type="submit" onclick="getWeather(event)">Search</button>
+</form>
+
+    <div id="weather-info"></div>
+</div>
+
+
+    <script>
+        function getWeather() {
+            const city = document.getElementById('city').value;
+
+            if (!city) {
+                alert('Please enter a city');
+                return;
+            }
+
+            // URL of the API endpoint for fetching weather data
+            const url = '/weather-data?city=' + encodeURIComponent(city);
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    alert('Error fetching weather data. Please try again.');
+                });
+        }
+
+        {% block head %}
+    <script src="{{ asset('js/weather.js') }}"></script>
+{% endblock %}
+
+        function displayWeather(data) {
+            constweatherInfoDiv = document.getElementById('weather-info');
+
+            const currentHTML = `
+                <h3>Current Weather</h3>
+                <p>${data.current.city} (${data.current.country})</p>
+                <p>${data.current.temp} ${data.current.temp_unit}</p>
+                <p>${data.current.description}</p>
+                <img src="https://openweathermap.org/img/wn/${data.current.icon}.png" alt="${data.current.description}">
+            `;
+
+            const forecastHTML = `
+                <h3>5 Days Weather Forecast</h3>
+            `;
+
+            for (const f of data.forecast) {
+                forecastHTML += `
+                    <div>
+                        <h4>${f.day}</h4>
+                        <p>${f.low} - ${f.high}</p>
+                    </div>
+                `;
+            }
+
+            weatherInfoDiv.innerHTML = currentHTML + forecastHTML;
+        }
+    </script>
+{% endblock %}
+
+#}
+
+{% extends 'evenement/evenementback.html.twig' %}
+
+
+
+
+
+{% block title %}Weather{% endblock %}
+
+{% block louay %}
+  <h1>Current Weather in {{ current.city }}</h1>
+  <p>Temperature: {{ current.temp }}°C</p>
+  <p>Description: {{ current.description }}</p>
+
+  {% if current.temp >= 12 and current.temp <= 40 %}
+    <h2>Good day for an event!</h2>
+  {% else %}
+    <h2>Bad day for an event!</h2>
+  {% endif %}
+   <h2>    .                </h2>
+   <h2>      .              </h2>
+   <h2>        .            </h2>
+   <h2>           .         </h2>
+  <h2>Forecast</h2>
+  <ul>
+    {% for day in forecast %}
+      <li>{{ day.day }}: {{ day.low }} - {{ day.high }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

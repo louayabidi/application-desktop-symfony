@@ -1,0 +1,30 @@
+{% extends 'evenement/evenementback.html.twig' %}
+
+{% block title %}Événements archivés{% endblock %}
+
+{% block louay %}
+    <h1>Événements archivés</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date de début</th>
+                 <th>   </th>
+                <th>Date de fin</th>
+                <th>image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in archivedEvents %}
+                <tr>
+                    <td>{{ event.nomEve }}</td>
+                    <td>{{ event.dateDeve|date('d/m/Y') }}</td>
+                    <td>   </td>
+                    <td>{{ event.dateFeve|date('d/m/Y') }}</td>
+                    <td><img src="{{ asset('uploads/images/evenements/' ~ event.imageEve) }}" alt="Image de l'événement" style="width: 200px; height: 200px;;"></td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

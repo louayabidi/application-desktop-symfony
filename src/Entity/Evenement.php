@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EvenementRepository;
+use App\Repository\ParticipationRepository;
 use Doctrine\DBAL\Schema\UniqueConstraint;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -143,5 +144,18 @@ public function getUrl(UrlGeneratorInterface $urlGenerator): string
 
 
 
+public function getParticipations(ParticipationRepository $participationRepository): array
+{ 
+    // Vérifie si le nombre maximum de participants est atteint
+    if ($this->getNbrMax() !== null && count($participationRepository->findBy(['idf_event' => $this->getIdEve()])) >= $this->getNbrMax()) {
+        return [];
+    }
+
+    // Sinon, retourne les participations associées à cet événement
+    return $participationRepository->findBy(['idfEvent' => $this->getIdEve()]);
+}
+
+
+    
 
 }

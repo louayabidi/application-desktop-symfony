@@ -45,4 +45,42 @@ class EvenementRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function findFutureEvents(\DateTimeInterface $currentDate)
+{
+    return $this->createQueryBuilder('e')
+        ->andWhere('e.dateFeve > :currentDate')
+        ->setParameter('currentDate', $currentDate)
+        ->getQuery()
+        ->getResult()
+    ;
+}
+
+public function findArchivedEvents()
+    {
+        $currentDate = new \DateTime();
+        
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.dateFeve < :currentDate')
+            ->setParameter('currentDate', $currentDate)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function search($term)
+{
+    return $this->createQueryBuilder('e')
+        ->where('e.nomEve LIKE :term')
+        ->orWhere('e.nbrMax LIKE :term')
+        ->orWhere('e.dateDeve LIKE :term')
+        ->orWhere('e.dateFeve LIKE :term')
+        ->orWhere('e.adresseEve LIKE :term')
+        ->setParameter('term', '%'.$term.'%')
+        ->getQuery()
+        ->getResult();
+}
+
 }

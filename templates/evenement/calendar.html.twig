@@ -1,30 +1,81 @@
-{% extends 'evenement/evenementback.html.twig' %}
+{% block title %}
+    <h1 style="color: #333; text-align: center;">Calendrier</h1>
+{% endblock %}
 
-{% block title %}Calendrier des événements{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 
-{% block louay %}
-    <h1>Calendrier des événements</h1>
+{% block stylesheets %}
+    <style>
+        #calendrier{
+            width: 90%;
+            margin: auto;
+            background-color: #Fbefea;
+        }
+        .fc-toolbar {
+            backgground-color: #Fbe1d7;
+        }
+        .styled-link {
+            color: #ffffff;
+            background-color: #007bff;
+            border: 0px solid #007bff;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
 
-    <div id="calendar"></div>
+        .top-left-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    {% for event in events %}
-                        {
-                            title: '{{ event.nomEve }}',
-                            start: '{{ event.dateDeve|date('Y-m-d') }}',
-                            {% if event.dateFeve %}
-                                end: '{{ event.dateFeve|date('Y-m-d') }}',
-                            {% endif %}
-                        },
-                    {% endfor %}
-                ]
-            });
-            calendar.render();
+        .top-left-buttons a {
+            background-color: #ff9380;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+   <div class="top-left-buttons">
+       <a href="{{ path('app_evenement_index') }}" class="fas fa-arrow-left styled-link"></a>
+       <a href="{{ path('app_evenement_new') }}" class="fas fa-plus styled-link"></a>
+   </div>
+   
+   <div id="calendrier"></div>
+     
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarElt = document.querySelector("#calendrier");
+
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            timeZone: 'Afrique/Tunisie',
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                end: ''
+            },
+            
+            events: {{ data | raw }}
         });
-    </script>
+
+        calendar.render();
+    });
+</script>
 {% endblock %}
