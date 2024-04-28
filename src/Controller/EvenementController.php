@@ -368,14 +368,28 @@ return $this->render('evenement/weather.html.twig', $weatherData);
 
 
    #[Route('/archive', name: 'app_evenement_archive', methods: ['GET'])]
-   public function archive(EvenementRepository $evenementRepository): Response
-   {
-       $archivedEvents = $evenementRepository->findArchivedEvents();
-       
-       return $this->render('evenement/archive.html.twig', [
-           'archivedEvents' => $archivedEvents,
-       ]);
-   }
+public function archive(EvenementRepository $evenementRepository, Request $request): Response
+{
+    // Vérifier si un terme de recherche est spécifié dans la requête
+    $searchTerm = $request->query->get('q');
+
+    if ($searchTerm) {
+        // Rechercher les événements archivés correspondants dans la base de données
+        $resultatsRecherche = $evenementRepository->search($searchTerm);
+
+        // Rendre la vue avec les résultats de la recherche
+        return $this->render('evenement/archive.html.twig', [
+            'resultatsRecherche' => $resultatsRecherche,
+        ]);
+    }
+
+    // Si aucun terme de recherche n'est spécifié, afficher tous les événements archivés
+    $archivedEvents = $evenementRepository->findArchivedEvents();
+    
+    return $this->render('evenement/archive.html.twig', [
+        'archivedEvents' => $archivedEvents,
+    ]);
+}
 
 
    
@@ -393,6 +407,29 @@ public function search(Request $request, EvenementRepository $evenementRepositor
     // Rendre la vue avec les résultats de la recherche
     return $this->render('evenement/table.html.twig', [
         'resultatsRecherche' => $resultatsRecherche,
+    ]);
+}
+
+
+#[Route('/sort-all', name: 'sort_events_all_attributes')]
+public function sortEventsByAllAttributes(Request $request, EvenementRepository $evenementRepository): Response
+{
+    // Récupérer l'attribut sélectionné depuis la requête
+    $sortAttribute = $request->query->get('sortAttribute');
+
+    // Vérifier si l'attribut est valide
+    $validAttributes = ['nomEve', 'dateDeve', 'dateFeve', 'adresseEve', 'nbrMax'];
+    if (!in_array($sortAttribute, $validAttributes)) {
+        throw new \InvalidArgumentException("L'attribut spécifié n'est pas valide.");
+    }
+
+    // Trier les événements par l'attribut spécifié
+    $sortedEvents = $evenementRepository->sortByAllAttributes($sortAttribute);
+
+    // Faites quelque chose avec les événements triés...
+
+    return $this->render('evenement/table.html.twig', [
+        'evenementss' => $sortedEvents,
     ]);
 }
 

@@ -4,27 +4,48 @@
 
 {% block louay %}
     <h1>Événements archivés</h1>
+
+    <form action="{{ path('app_evenement_archive') }}" method="GET" class="my-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Rechercher...">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+    </form>
+    
     <table>
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Date de début</th>
-                 <th>   </th>
+                <th>   </th>
                 <th>Date de fin</th>
-                <th>image</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
-            {% for event in archivedEvents %}
-                <tr>
-                    <td>{{ event.nomEve }}</td>
-                    <td>{{ event.dateDeve|date('d/m/Y') }}</td>
-                    <td>   </td>
-                    <td>{{ event.dateFeve|date('d/m/Y') }}</td>
-                    <td><img src="{{ asset('uploads/images/evenements/' ~ event.imageEve) }}" alt="Image de l'événement" style="width: 200px; height: 200px;;"></td>
-
-                </tr>
-            {% endfor %}
+            {% if resultatsRecherche is defined %}
+                {% for event in resultatsRecherche %}
+                    <tr>
+                        <td>{{ event.nomEve }}</td>
+                        <td>{{ event.dateDeve|date('d/m/Y') }}</td>
+                        <td>   </td>
+                        <td>{{ event.dateFeve|date('d/m/Y') }}</td>
+                        <td><img src="{{ asset('uploads/images/evenements/' ~ event.imageEve) }}" alt="Image de l'événement" style="width: 200px; height: 200px;"></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% for event in archivedEvents %}
+                    <tr>
+                        <td>{{ event.nomEve }}</td>
+                        <td>{{ event.dateDeve|date('d/m/Y') }}</td>
+                        <td>   </td>
+                        <td>{{ event.dateFeve|date('d/m/Y') }}</td>
+                        <td><img src="{{ asset('uploads/images/evenements/' ~ event.imageEve) }}" alt="Image de l'événement" style="width: 200px; height: 200px;"></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 {% endblock %}

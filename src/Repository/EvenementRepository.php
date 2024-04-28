@@ -83,4 +83,21 @@ public function findArchivedEvents()
         ->getResult();
 }
 
+
+public function sortByAllAttributes(string $attribute, string $order = 'asc')
+    {
+        // Vérifier si l'attribut est valide
+        $validAttributes = ['nomEve', 'dateDeve', 'dateFeve', 'adresseEve', 'nbrMax']; // Liste des attributs valides
+        if (!in_array($attribute, $validAttributes)) {
+            throw new \InvalidArgumentException("L'attribut spécifié n'est pas valide.");
+        }
+
+        // Créer la requête pour trier les événements en fonction de l'attribut et de l'ordre spécifiés
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->orderBy('e.' . $attribute, $order);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+
 }
