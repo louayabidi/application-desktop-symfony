@@ -2,92 +2,56 @@
 
 namespace App\Controller;
 
-require_once 'C:\Users\louay\webpidev\web-app-main\includes\dompdf\autoload.inc.php';
-
-use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Participation;
-use Dompdf\Options;
-
+use TCPDF;
 
 class CertificateController extends AbstractController
 {
     #[Route('/generate-certificate/{idP}', name: 'app_generate_certificate')]
-public function generateCertificate($idP): Response
-{
-    // Récupérer le participant à partir de son ID
-    $participation = $this->getDoctrine()->getRepository(Participation::class)->find($idP);
+    public function generateCertificate($idP): Response
+    {
+        // Récupérer le participant à partir de son ID
+        $participation = $this->getDoctrine()->getRepository(Participation::class)->find($idP);
 
-    // Vérifier si le participant existe
-    if (!$participation) {
-        throw $this->createNotFoundException('Participant non trouvé');
+        // Vérifier si le participant existe
+        if (!$participation) {
+            throw $this->createNotFoundException('Participant non trouvé');
+        }
+
+        // Récupérer les informations spécifiques à cette participation
+        $participantName = $participation->getNomP() . ' ' . $participation->getPrenomP();
+        $eventName = $participation->getIdfEvent()->getNomEve();
+
+        // Créer un objet TCPDF pour générer le certificat
+        $pdf = new TCPDF();
+
+        // Ajouter une page
+        $pdf->AddPage();
+
+        // Charger l'image de fond et la faire couvrir toute la page
+        $backgroundImage = 'C:\Users\louay\webpidev\web-app-main\public\certificat_image\Certificate.png'; // Chemin vers votre image de fond
+        $pdf->Image($backgroundImage, 10, 10, $pdf->getPageWidth(), $pdf->getPageHeight(), '', '', '', false, 400, '', false, false, 0);
+
+        // Définir la police et la taille de la police
+        $pdf->SetFont('helvetica', '', 20);
+
+        // Centrer le texte horizontalement et verticalement
+        $pdf->SetXY(0, 70);
+ 
+        $pdf->Cell(0, 0, "Certificat de participation", 0, 0, 'C');
+        $pdf->Ln(10);
+
+        $pdf->Cell(0, 0, $eventName, 0, 0, 'C');
+        $pdf->Ln(10);
+        $pdf->SetXY(0, 135);
+        $pdf->Cell(0, 0, " $participantName", 0, 0, 'C');
+
+        // Retourner le PDF en tant que réponse
+        return new Response($pdf->Output('certificate.pdf', 'I'), 300, [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
-
-    // Récupérer les informations spécifiques à cette participation
-    $participantName = $participation->getNomP() . ' ' . $participation->getPrenomP();
-    $eventName = $participation->getIdfEvent()->getNomEve();
-
-    // Créer un objet Dompdf pour générer le certificat
-    $dompdf = new Dompdf();
-
-    // Load the background image
-    $backgroundImage = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/certificat_image/Certificate.png');
-
-    // HTML du certificat avec image de fond
-    $html = "
-    <style>
-        .background {
-            background-image: url('data:image/png;base64, " . base64_encode($backgroundImage) . "');
-            background-size: cover;
-            background-position: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .content {
-            text-align: center;
-            margin-top: 100px;
-            position: relative;
-            z-index: 1;
-            
-        }
-    </style>
-    <body>
-        <div class='background'></div>
-        <div class='content'>
-            <h1>Certificat de participation</h1>
-            <h1> $eventName</h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h1>             </h1>
-            <h2>Participant : $participantName</h2>
-            
-        </div>
-    </body>
-";
-    // Charger le HTML dans Dompdf
-    $dompdf->loadHtml($html);
-
-    // Rendre le PDF
-    $dompdf->render();
-
-    // Retourner le PDF en tant que réponse
-    return new Response($dompdf->output(), 200, [
-        'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'inline; filename="certificate.pdf"'
-    ]);
-}
 }
