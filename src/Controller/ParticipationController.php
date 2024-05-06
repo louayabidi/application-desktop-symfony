@@ -33,12 +33,12 @@ class ParticipationController extends AbstractController
         
 
 
-        // Récupérer les statistiques
+        // statistiques
     $statistics = $participationRepository->getParticipantsCountByEvent();
 
     return $this->render('participation/index.html.twig', [
         'participations' => $participations,
-        'statistics' => $statistics, // Passer les statistiques à la vue
+        'statistics' => $statistics, // Passer les statistiques 
     ]);
        
     }
@@ -69,52 +69,41 @@ public function search(Request $request, ParticipationRepository $participationR
 #[Route('/addparticipation', name: 'app_participation_new', methods: ['GET', 'POST'])]
 public function new(Request $request, EntityManagerInterface $entityManager, ParticipationRepository $participationRepository): Response
 {
-    // Récupérer l'ID de l'événement à partir de la requête
+   
     $idEve = $request->query->get('idEve');
 
-    // Si l'ID de l'événement n'est pas récupéré, rediriger vers une autre page ou afficher un message d'erreur
+  
     if (!$idEve) {
-        // Rediriger vers une autre page ou afficher un message d'erreur
+       
     }
 
-    // Charger l'entité Evenement correspondante à partir de la base de données
+
     $evenement = $entityManager->getRepository(Evenement::class)->find($idEve);
 
-    // Si l'événement n'est pas trouvé, rediriger vers une autre page ou afficher un message d'erreur
+    
     if (!$evenement) {
-        // Rediriger vers une autre page ou afficher un message d'erreur
+       
     }
 
-    // Vérifier si le nombre maximum de participants est atteint
+  
     if ($evenement->getNbrMax() !== null && count($participationRepository->findBy(['idf_event' => $evenement->getIdEve()])) >= $evenement->getNbrMax()) {
-        // Rediriger vers la page de fermeture de l'événement avec l'image
+       
         return $this->redirectToRoute('app_evenement_close');
     }
 
-    // Créer une nouvelle instance de Participation
+
     $participation = new Participation();
-
-    // Créer le formulaire pour la participation
     $form = $this->createForm(ParticipationType::class, $participation);
-
-    // Gérer la soumission du formulaire
     $form->handleRequest($request);
 
-    // Vérifier si le formulaire est soumis et valide
     if ($form->isSubmitted() && $form->isValid()) {
-        // Définir l'événement dans la participation
         $participation->setIdfEvent($evenement);
 
-        // Persister la nouvelle participation
         $entityManager->persist($participation);
-        // Appliquer les changements à la base de données
         $entityManager->flush();
-
-        // Rediriger vers une autre page après la création de la participation
         return $this->redirectToRoute('app_participation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    // Afficher à nouveau le formulaire de création de participation
     return $this->renderForm('participation/new.html.twig', [
         'participation' => $participation,
         'form' => $form,

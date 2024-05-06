@@ -26,10 +26,10 @@ class EvenementController extends AbstractController
     #[Route('/all', name: 'app_evenement_index', methods: ['GET'])]
     public function all(EvenementRepository $evenementRepository, Request $request): Response
     {
-        // Récupérer la date actuelle
+    
         $currentDate = new \DateTime();
         
-        // Récupérer tous les événements dont la date de fin est ultérieure à la date actuelle
+     
         $evenements = $evenementRepository->findFutureEvents($currentDate);
         
         return $this->render('evenement/liste_events.html.twig', [
@@ -42,10 +42,8 @@ class EvenementController extends AbstractController
     #[Route('/allback', name: 'app_evenement_indexback', methods: ['GET'])]
     public function allback(EvenementRepository $evenementRepository): Response
     {
-        // Récupérer la date actuelle
+        //comparaison des dates 
         $currentDate = new \DateTime();
-        
-        // Récupérer tous les événements dont la date de fin est ultérieure à la date actuelle
         $evenementss = $evenementRepository->findFutureEvents($currentDate);
         
         return $this->render('evenement/table.html.twig', [
@@ -64,25 +62,23 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            // Récupérer le fichier téléchargé
             $imageFile = $form->get('imageEve')->getData();
     
-            // Vérifier si un fichier a été téléchargé
+           
             if ($imageFile) {
-                // Donner un nom unique au fichier
+               
                 $newFilename = uniqid().'.'.$imageFile->guessExtension();
     
-                // Déplacer le fichier vers le répertoire où vous souhaitez stocker les images des événements
                 try {
                     $imageFile->move(
                         $this->getParameter('evenement_images_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Gérer l'erreur si le déplacement du fichier échoue
+                  
                 }
     
-                // Stocker le nom du fichier dans la base de données
+                
                 $evenement->setImageEve($newFilename);
             }
     
@@ -95,11 +91,11 @@ class EvenementController extends AbstractController
             if ($existingEvent) {
                 // Afficher un message error
                 $this->addFlash('error', 'Un événement avec le même nom et la même date de début existe déjà.');
-                // Rediriger vers la page de création de l'événement
+               
                 return $this->redirectToRoute('app_evenement_new');
             }
     
-            //  nouvel événement est unique
+            
             $entityManager->persist($evenement);
             $entityManager->flush();
     
@@ -255,7 +251,7 @@ public function show(#[ParamConverter('evenement', options: ['mapping' => ['idEv
     {
         $city = $request->query->get('city');
         
-        $api_key = 'be879e24600ae11dc004c73f0de0d4a1'; // Replace with your OpenWeatherMap API key
+        $api_key = 'be879e24600ae11dc004c73f0de0d4a1'; 
         $api_url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$api_key}&units=metric";
     
         $data = file_get_contents($api_url);
@@ -299,7 +295,7 @@ public function show(#[ParamConverter('evenement', options: ['mapping' => ['idEv
     'forecast' => $forecast,
 ];
 
-// Passer les données au template Twig
+
 return $this->render('evenement/weather.html.twig', $weatherData);
     }
 
@@ -346,8 +342,8 @@ return $this->render('evenement/weather.html.twig', $weatherData);
                'start' => $event->getDateDeve()->format('Y-m-d'),
                'end' => $event->getDateFeve()->format('Y-m-d'),
                'title' => $event->getNomEve(),
-               'backgroundColor' => '#fcb97e',
-               'borderColor' => '#fba22e',
+               'backgroundColor' => '#365679',
+               'borderColor' => '#EFDDB8',
            ];
        }
    
@@ -370,20 +366,20 @@ return $this->render('evenement/weather.html.twig', $weatherData);
    #[Route('/archive', name: 'app_evenement_archive', methods: ['GET'])]
 public function archive(EvenementRepository $evenementRepository, Request $request): Response
 {
-    // Vérifier si un terme de recherche est spécifié dans la requête
+   
     $searchTerm = $request->query->get('q');
 
     if ($searchTerm) {
-        // Rechercher les événements archivés correspondants dans la base de données
+       
         $resultatsRecherche = $evenementRepository->search($searchTerm);
 
-        // Rendre la vue avec les résultats de la recherche
+      
         return $this->render('evenement/archive.html.twig', [
             'resultatsRecherche' => $resultatsRecherche,
         ]);
     }
 
-    // Si aucun terme de recherche n'est spécifié, afficher tous les événements archivés
+   
     $archivedEvents = $evenementRepository->findArchivedEvents();
     
     return $this->render('evenement/archive.html.twig', [
@@ -398,13 +394,13 @@ public function archive(EvenementRepository $evenementRepository, Request $reque
    #[Route('/search', name: 'app_evenement_search', methods: ['GET'])]
 public function search(Request $request, EvenementRepository $evenementRepository): Response
 {
-    // Récupérer le terme de recherche depuis la requête
+   
     $searchTerm = $request->query->get('q');
 
-    // Rechercher les événements correspondants dans la base de données
+    
     $resultatsRecherche = $evenementRepository->search($searchTerm);
 
-    // Rendre la vue avec les résultats de la recherche
+   
     return $this->render('evenement/table.html.twig', [
         'resultatsRecherche' => $resultatsRecherche,
     ]);
@@ -414,19 +410,19 @@ public function search(Request $request, EvenementRepository $evenementRepositor
 #[Route('/sort-all', name: 'sort_events_all_attributes')]
 public function sortEventsByAllAttributes(Request $request, EvenementRepository $evenementRepository): Response
 {
-    // Récupérer l'attribut sélectionné depuis la requête
+    
     $sortAttribute = $request->query->get('sortAttribute');
 
-    // Vérifier si l'attribut est valide
+   
     $validAttributes = ['nomEve', 'dateDeve', 'dateFeve', 'adresseEve', 'nbrMax'];
     if (!in_array($sortAttribute, $validAttributes)) {
         throw new \InvalidArgumentException("L'attribut spécifié n'est pas valide.");
     }
 
-    // Trier les événements par l'attribut spécifié
+    
     $sortedEvents = $evenementRepository->sortByAllAttributes($sortAttribute);
 
-    // Faites quelque chose avec les événements triés...
+   
 
     return $this->render('evenement/table.html.twig', [
         'evenementss' => $sortedEvents,

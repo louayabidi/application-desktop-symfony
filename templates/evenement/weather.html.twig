@@ -155,15 +155,15 @@ men hna code akher
   <p>Description: {{ current.description }}</p>
 
   {% if current.temp >= 12 and current.temp <= 40 %}
-    <h2>Good day for an event!</h2>
+    <h2>Bon jour pour un évenement!</h2>
   {% else %}
-    <h2>Bad day for an event!</h2>
+    <h2>les conditions de méteo ne sont pas favorable</h2>
   {% endif %}
-   <h2>    .                </h2>
-   <h2>      .              </h2>
-   <h2>        .            </h2>
-   <h2>           .         </h2>
-  <h2>Forecast</h2>
+   <h2>                  </h2>
+   <h2>                </h2>
+   <h2>                  </h2>
+   <h2>                  </h2>
+  <h2>meteo pour les 5 jours</h2>
   <ul>
     {% for day in forecast %}
       <li>{{ day.day }}: {{ day.low }} - {{ day.high }}</li>

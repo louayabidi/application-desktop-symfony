@@ -87,7 +87,7 @@ public function findArchivedEvents()
 public function sortByAllAttributes(string $attribute, string $order = 'asc')
     {
         // Vérifier si l'attribut est valide
-        $validAttributes = ['nomEve', 'dateDeve', 'dateFeve', 'adresseEve', 'nbrMax']; // Liste des attributs valides
+        $validAttributes = ['nomEve', 'dateDeve', 'dateFeve', 'adresseEve', 'nbrMax']; 
         if (!in_array($attribute, $validAttributes)) {
             throw new \InvalidArgumentException("L'attribut spécifié n'est pas valide.");
         }

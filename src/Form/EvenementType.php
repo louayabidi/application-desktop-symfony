@@ -20,8 +20,8 @@ class EvenementType extends AbstractType
             ->add('adresseEve')
             ->add('imageEve', FileType::class, [
                 'label' => 'Image de l\'événement',
-                'mapped' => false, // Ne pas mapper ce champ à une propriété de l'entité
-                'required' => false, // Le champ n'est pas obligatoire
+                'mapped' => false, 
+                'required' => false, 
             ])
         ; 
     }

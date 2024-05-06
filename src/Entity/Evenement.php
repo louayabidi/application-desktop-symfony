@@ -123,7 +123,7 @@ class Evenement
         return $this;
     }
 
-// Méthode toString pour la classe Evenement
+
 public function __toString(): string
 {
     return sprintf(
@@ -134,11 +134,9 @@ public function __toString(): string
         $this->getAdresseEve() ?? 'N/A'
     );
 }
-
-// Ajoutez cette méthode pour obtenir l'URL de l'événement
+///get url evnet pour le calendar/////////
 public function getUrl(UrlGeneratorInterface $urlGenerator): string
 {
-    // Remplacez 'app_evenement_show' par le nom de votre route pour afficher les détails de l'événement
     return $urlGenerator->generate('app_evenement_show', ['idEve' => $this->getIdEve()]);
 }
 
@@ -146,12 +144,11 @@ public function getUrl(UrlGeneratorInterface $urlGenerator): string
 
 public function getParticipations(ParticipationRepository $participationRepository): array
 { 
-    // Vérifie si le nombre maximum de participants est atteint
+    // Vérifie nbrmax
     if ($this->getNbrMax() !== null && count($participationRepository->findBy(['idf_event' => $this->getIdEve()])) >= $this->getNbrMax()) {
         return [];
     }
 
-    // Sinon, retourne les participations associées à cet événement
     return $participationRepository->findBy(['idfEvent' => $this->getIdEve()]);
 }
 
